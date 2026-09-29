@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "aerobinsite",
+  "compatibility_date": "2025-09-01",
+
+  // Static assets only: there is no server code. Vite builds into dist/ and
+  // Cloudflare serves it straight from the edge.
+  "assets": {
+    "directory": "./dist",
+    // Client side routes such as /dashboard must fall back to index.html
+    // rather than 404, which is what this handling mode does.
+    "not_found_handling": "single-page-application"
+  }
+}

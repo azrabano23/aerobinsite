@@ -59,3 +59,20 @@ npm run build      # production build
 ## License
 
 MIT — see [LICENSE](LICENSE). Dashboard front-end by Rish Dhingra; product & direction by **Azra Bano**.
+
+## Cloudflare Workers
+
+Deployed as a static assets Worker. `wrangler.jsonc` points at `dist/` and
+sets `not_found_handling` to `single-page-application`, so client side
+routes such as `/dashboard` resolve instead of 404ing.
+
+In the Cloudflare dashboard, under Settings, Build:
+
+| Setting | Value |
+|---|---|
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Root directory | `/` |
+
+The build command is the part that matters. Without it `dist/` is never
+produced and `wrangler deploy` has nothing to upload.
